@@ -2,6 +2,10 @@ name: SonarQube Analysis
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
 
 jobs:
   sonarqube:
@@ -31,6 +35,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: SonarQube Quality Gate check
         uses: SonarSource/sonarqube-quality-gate-action@v1.2.0
